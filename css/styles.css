@@ -1,0 +1,24 @@
+ul {
+  list-style-type: none;
+}
+.gallery {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(3, 360px);
+  align-items: center;
+  justify-items: center;
+}
+img {
+  width: 360px;
+  height: 200px;
+  transition: transform 250ms ease-in;
+}
+img:hover {
+  transform: scale(1.05);
+}
+body {
+  overflow: hidden;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
