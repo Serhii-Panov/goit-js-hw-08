@@ -63,36 +63,35 @@ const images = [
     description: "Lighthouse Coast Sea",
   },
 ];
-const gallery = document.querySelector(".gallery");
+let gallery = document.querySelector(".gallery");
 
-function fillGallery(gallery, content) {
-  for (let image of content) {
-    gallery.insertAdjacentHTML(
-      "beforeend",
-      `<li class="gallery-item">
-  <a class="gallery-link" href=${image.original}>
-    <img
-      class="gallery-image"
-      src=${image.preview}
-      data-source=${image.original}
-      alt=${image.description}
-    />
-  </a>
-</li>`
-    );
-  }
-}
+const newContent = images
+  .map(
+    (image) => `
+    <li class="gallery-item">
+      <a class="gallery-link" href="${image.original}">
+        <img
+          class="gallery-image"
+          src="${image.preview}"
+          data-source="${image.original}"
+          alt="${image.description}"
+        />
+      </a>
+    </li>`
+  )
+  .join("");
+
+gallery.insertAdjacentHTML("beforeend", newContent);
+
 function handleClick(event) {
-    event.preventDefault();
-    if (event.target.nodeName === "IMG") {
-          console.log(event.target.dataset.source);
-  const modal = basicLightbox.create(`
+  event.preventDefault();
+  if (event.target.nodeName === "IMG") {
+    console.log(event.target.dataset.source);
+    const modal = basicLightbox.create(`
 	<img src=${event.target.dataset.source}>
 `);
-  modal.show();
-    }
-
+    modal.show();
+  }
 }
 
-fillGallery(gallery, images);
 gallery.addEventListener("click", handleClick);
